@@ -11,7 +11,7 @@ class MemoData extends ChangeNotifier {
   ];
 
   List<KeywordTemp> keywordStore = [
-    KeywordTemp(keywordName: '織田信長', noteId: []),
+    KeywordTemp(keywordName: '織田信長', noteId: [1,2,3,4]),
     KeywordTemp(keywordName: '豊臣秀吉', noteId: []),
   ];
 
