@@ -18,6 +18,7 @@ class _ShowScreenState extends State<ShowScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.memoTitle),
+        centerTitle: true,
       ),
       body: Center(
         child: Container(

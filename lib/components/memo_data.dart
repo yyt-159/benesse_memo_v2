@@ -13,4 +13,9 @@ class MemoData extends ChangeNotifier {
     return memoStore.length;
   }
 
+  void addData (memoTitle,memoBody){
+    final memo = MemoTemp(memoTitle: memoTitle,memoBody: memoBody);
+    memoStore.add(memo);
+    notifyListeners();
+  }
 }
