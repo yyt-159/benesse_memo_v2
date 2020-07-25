@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'benesse_drawer.dart';
 
 class ShowScreen extends StatefulWidget {
 
@@ -20,6 +21,7 @@ class _ShowScreenState extends State<ShowScreen> {
         title: Text(widget.memoTitle),
         centerTitle: true,
       ),
+      endDrawer: BenesseDrawer(),
       body: Center(
         child: Container(
           child: Text(widget.memoBody),
