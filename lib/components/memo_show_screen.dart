@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'benesse_drawer.dart';
+import 'style.dart';
 
 class ShowScreen extends StatefulWidget {
 
@@ -19,7 +20,8 @@ class _ShowScreenState extends State<ShowScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.memoTitle),
+        title: Text(widget.memoTitle,
+        style: kLargeTextStyle,),
         centerTitle: true,
       ),
       endDrawer: BenesseDrawer(),
@@ -30,7 +32,8 @@ class _ShowScreenState extends State<ShowScreen> {
             //用意でき次第Image.asset(photoName)に変更
             Image.network('https://placehold.jp/314x256.png'),
             SizedBox(height: 40.0),
-            Text(widget.memoBody),
+            Text(widget.memoBody,
+                style: kLargeTextStyle),
             //用意でき次第keywordを表示させるWidgetに変更
           ],
         ),

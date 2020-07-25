@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'style.dart';
 
 class MemoTile extends StatelessWidget {
   final String memoTitle;
@@ -9,7 +10,8 @@ class MemoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(memoTitle),
+      title: Text(memoTitle,
+        style: kLargeTextStyle),
     );
   }
 }
