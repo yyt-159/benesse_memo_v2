@@ -190,6 +190,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
 //            SizedBox(
 //              height: 10,
 //            ),
+
 //            Expanded(
 //              child: ListView.builder(
 //                  scrollDirection: Axis.vertical,
@@ -244,6 +245,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
+
                 int _memoId =
                     Provider.of<MemoData>(context, listen: false).memoId;
                 Provider.of<MemoData>(context, listen: false)
