@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'memo_data.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'image_file_controller.dart';
 
 // 表示用の書式設定
 const kLabelTextStyle = TextStyle(
@@ -39,6 +41,28 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   void dispose() {
     myController.dispose();
     super.dispose();
+  }
+
+  File _image;
+  String _imagePathName;
+  // インスタンス生成
+  final ImagePicker picker = ImagePicker();
+
+  void selectImage() async {
+    print('push button');
+
+    // アルバムから読み込み
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      _imagePathName = pickedFile.path;
+    } else {
+      print('Error');
+    }
+    var savedFile = await FileController.saveLocalImage(_image); //追加
+    setState(() {
+      this._image = savedFile; //変更
+    });
   }
 
   @override
@@ -82,18 +106,31 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 SizedBox(
                   width: 30,
                 ),
-                FlatButton(
-                  child: Text(
-                    '+',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  color: Colors.lightBlueAccent,
-                  onPressed: () {
-                    addKeyword(myController.text);
-                  },
-                ),
+                //画像をストレージから挿入
+                Container(
+                    child: (_image == null)
+                        ? FlatButton(
+                            child: Text(
+                              '+',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            color: Colors.lightBlueAccent,
+                            onPressed: () {
+                              selectImage();
+                            },
+                          )
+                        : FlatButton(
+                            onPressed: () {
+                              selectImage();
+                            },
+                            child: Image.memory(
+                              _image.readAsBytesSync(),
+                              width: 200.0,
+                              height: 200.0,
+                            ),
+                          )),
               ],
             ), // Body（Image）
             Row(
@@ -185,10 +222,11 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-               int _memoId = Provider.of<MemoData>(context, listen: false).memoId;
+                int _memoId =
+                    Provider.of<MemoData>(context, listen: false).memoId;
                 Provider.of<MemoData>(context, listen: false)
-                    .addData(_addingMemoTitle, _addingMemoBody,'',_memoId);
-               Provider.of<MemoData>(context, listen: false).memoId++;
+                    .addData(_addingMemoTitle, _addingMemoBody, '', _memoId);
+                Provider.of<MemoData>(context, listen: false).memoId++;
                 print(Provider.of<MemoData>(context, listen: false).memoId);
                 Navigator.pop(context);
               },
