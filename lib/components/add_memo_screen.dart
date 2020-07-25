@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+<<<<<<< HEAD
 import 'package:flutter/rendering.dart';
+=======
+
+>>>>>>> 236409a2dcf7d2891bb55b659a796dd648620503
 import 'memo_data.dart';
+
 // 表示用の書式設定
 const kLabelTextStyle = TextStyle(
   fontSize: 18,
   color: Colors.black,
 );
+
 class AddMemoScreen extends StatefulWidget {
   @override
   _AddMemoScreenState createState() => _AddMemoScreenState();
 }
+
 class _AddMemoScreenState extends State<AddMemoScreen> {
   String _addingMemoTitle;
   String _addingMemoBody;
+
   // テキストフィールドの管理用コントローラを作成
   final myController = TextEditingController();
+
   // データ格納用リスト
   List<Map<String, dynamic>> items = [];
   List<int> keyIds=[];
@@ -35,8 +44,10 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       items.add({"id": keyId, "title": inputkeyword});
     });
   }
+
   //　上記リストのカウント変数（ID用）
   int _counter = 0;
+<<<<<<< HEAD
   var _textFieldFocusNode;
   var _inputController = TextEditingController();
   var _chipList = List<Chip>();
@@ -60,6 +71,9 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   void _deleteChip(Key chipKey) {
     setState(() => _chipList.removeWhere((Widget w) => w.key == chipKey));
   }
+=======
+
+>>>>>>> 236409a2dcf7d2891bb55b659a796dd648620503
   @override
   // widgetの破棄時にコントローラも破棄する
   void dispose() {
@@ -67,6 +81,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
     _textFieldFocusNode.dispose();
     super.dispose();
   }
+<<<<<<< HEAD
   void _onSubmitted(String text) {
     setState(() {
       _inputController.text = '';
@@ -74,6 +89,9 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       FocusScope.of(context).requestFocus(_textFieldFocusNode);
     });
   }
+=======
+
+>>>>>>> 236409a2dcf7d2891bb55b659a796dd648620503
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -237,6 +255,26 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
             SizedBox(
               height: 10,
             ),
+<<<<<<< HEAD
+=======
+            Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = items[index];
+                    return new Card(
+                      child: ListTile(
+//                        leading: Icon(Icons.link),
+                        title:
+//                            Text(item["id"].toString() + ":  " + item["title"]),
+                            Text("　＃  " + item["title"]),
+                      ),
+                    );
+                  }),
+            ),
+>>>>>>> 236409a2dcf7d2891bb55b659a796dd648620503
             FlatButton(
               child: Text(
                 'CREATE',
@@ -246,11 +284,19 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
+<<<<<<< HEAD
                 int _memoId =
                     Provider.of<MemoData>(context, listen: false).memoId;
                 Provider.of<MemoData>(context, listen: false)
                     .addData(_addingMemoTitle, _addingMemoBody, '', _memoId,keyIds);
                 Provider.of<MemoData>(context, listen: false).memoId++;
+=======
+               int _memoId = Provider.of<MemoData>(context, listen: false).memoId;
+                Provider.of<MemoData>(context, listen: false)
+                    .addData(_addingMemoTitle, _addingMemoBody,'',_memoId);
+               Provider.of<MemoData>(context, listen: false).memoId++;
+                print(Provider.of<MemoData>(context, listen: false).memoId);
+>>>>>>> 236409a2dcf7d2891bb55b659a796dd648620503
                 for(int i=0;i<items.length;i++){
                   Provider.of<MemoData>(context, listen: false).registarKeyword(items[i]['title'], _memoId);
                 }

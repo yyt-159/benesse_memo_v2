@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'memo_temp.dart';
 import 'keyword_temp.dart';
 class MemoData extends ChangeNotifier {
+<<<<<<< HEAD
   int memoId = 1;
+=======
+
+  int memoId = 1;
+
+>>>>>>> 236409a2dcf7d2891bb55b659a796dd648620503
   List<MemoTemp> memoStore = [
     MemoTemp(memoTitle: '織田信長',memoBody: '織田信長のメモが表示されます',photoName: '',keywordsId: [1]),
     MemoTemp(memoTitle: '豊臣秀吉',memoBody: '豊臣秀吉のメモが表示されます',photoName: '',keywordsId: [2]),
@@ -41,8 +47,14 @@ class MemoData extends ChangeNotifier {
     }
     notifyListeners();
   }
+<<<<<<< HEAD
   void addData (memoTitle,memoBody,photoName,memoId, keywordsId){
     final memo = MemoTemp(memoTitle: memoTitle,memoBody: memoBody, photoName:photoName,memoId: memoId, keywordsId: keywordsId);
+=======
+
+  void addData (memoTitle,memoBody,photoName,memoId){
+    final memo = MemoTemp(memoTitle: memoTitle,memoBody: memoBody, photoName:photoName,memoId: memoId);
+>>>>>>> 236409a2dcf7d2891bb55b659a796dd648620503
     memoStore.add(memo);
     notifyListeners();
   }
