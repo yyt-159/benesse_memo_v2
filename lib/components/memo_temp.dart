@@ -7,6 +7,9 @@ class MemoTemp{
   String photoName;
   int memoId;
 
-  MemoTemp({this.memoBody,this.memoTitle, this.photoName,this.memoId});
+  List<int> keywordsId;
+
+  MemoTemp({this.memoBody,this.memoTitle, this.photoName, this.memoId, this.keywordsId});
+
 
 }

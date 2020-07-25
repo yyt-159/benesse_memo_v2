@@ -4,6 +4,7 @@ class KeywordTemp{
 
   String keywordName;
   List<int> noteId;
-  KeywordTemp({this.keywordName, this.noteId});
+  int keywordId;
+  KeywordTemp({this.keywordName, this.noteId, this.keywordId});
 
 }
