@@ -16,7 +16,7 @@ class ShowScreen extends StatefulWidget {
 class _ShowScreenState extends State<ShowScreen> {
   @override
   Widget build(BuildContext context) {
-    print('${widget.photoName}');
+    //print('${widget.photoName}');
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.memoTitle),
