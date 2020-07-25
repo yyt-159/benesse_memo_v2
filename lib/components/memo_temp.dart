@@ -6,6 +6,7 @@ class MemoTemp{
   String memoTitle;
   String photoName;
 
+
   MemoTemp({this.memoBody,this.memoTitle, this.photoName});
 
 }

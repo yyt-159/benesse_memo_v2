@@ -6,8 +6,8 @@ import 'keyword_temp.dart';
 class MemoData extends ChangeNotifier {
 
   List<MemoTemp> memoStore = [
-    MemoTemp(memoTitle: '織田信長',memoBody: '織田信長の資料が表示されます',photoName: ''),
-    MemoTemp(memoTitle: '豊臣秀吉',memoBody: '豊臣秀吉の資料が表示されます',photoName: ''),
+    MemoTemp(memoTitle: '織田信長',memoBody: '織田信長のメモが表示されます',photoName: ''),
+    MemoTemp(memoTitle: '豊臣秀吉',memoBody: '豊臣秀吉のメモが表示されます',photoName: ''),
   ];
 
   List<KeywordTemp> keywordStore = [
