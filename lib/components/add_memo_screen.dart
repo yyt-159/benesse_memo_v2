@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'memo_data.dart';
+
 // 表示用の書式設定
 const kLabelTextStyle = TextStyle(
   fontSize: 18,
   color: Colors.black,
 );
+
 class AddMemoScreen extends StatefulWidget {
   @override
   _AddMemoScreenState createState() => _AddMemoScreenState();
 }
+
 class _AddMemoScreenState extends State<AddMemoScreen> {
   String _addingMemoTitle;
   String _addingMemoBody;
+
   // テキストフィールドの管理用コントローラを作成
   final myController = TextEditingController();
+
   // データ格納用リスト
   List<Map<String, dynamic>> items = [];
   // Keywordに入力された言葉を追加する
@@ -24,19 +30,22 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       items.add({"id": _counter, "title": inputkeyword});
     });
   }
+
   //　上記リストのカウント変数（ID用）
   int _counter = 0;
+
   @override
   // widgetの破棄時にコントローラも破棄する
   void dispose() {
     myController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('新規作成'),
+        title: Text('NEW NOTEBOOK'),
         centerTitle: true,
       ),
       body: Padding(
@@ -46,17 +55,14 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text(
-                  'Title',
-                  style: kLabelTextStyle,
-                ),
-                SizedBox(
-                  width: 40,
-                ),
                 Expanded(
                   child: TextField(
                     autofocus: true,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.title),
+                      hintText: 'MEMO TITLE *',
+                    ),
                     onChanged: (newMemoTitle) {
                       _addingMemoTitle = newMemoTitle;
                     },
@@ -64,35 +70,45 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 ),
               ],
             ), // Title
+            SizedBox(
+              height: 15,
+            ),
             Row(
               children: <Widget>[
-                Text(
-                  'Body',
-                  style: kLabelTextStyle,
-                ),
                 SizedBox(
-                  width: 40,
+                  width: 20,
                 ),
-                Icon(
-                  Icons.class_,
-                  color: Colors.blue[400],
-                  size: 100.0,
+                Icon(Icons.import_contacts),
+                SizedBox(
+                  width: 30,
+                ),
+                FlatButton(
+                  child: Text(
+                    '+',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  color: Colors.lightBlueAccent,
+                  onPressed: () {
+                    addKeyword(myController.text);
+                  },
                 ),
               ],
             ), // Body（Image）
             Row(
               children: <Widget>[
-                Text(
-                  'Memo',
-                  style: kLabelTextStyle,
-                ),
                 SizedBox(
-                  width: 30,
+                  width: 20,
                 ),
                 Expanded(
                   child: TextField(
                     autofocus: true,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.insert_comment),
+                      hintText: '+α memo',
+                    ),
                     onChanged: (newMemoBody) {
                       _addingMemoBody = newMemoBody;
                     },
@@ -100,17 +116,22 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 ),
               ],
             ), // Memo
+            SizedBox(
+              height: 25,
+            ),
             Row(
               children: <Widget>[
-                Text(
-                  'Keyword',
-                  style: kLabelTextStyle,
-                ),
                 SizedBox(
-                  width: 30,
+                  width: 20,
                 ),
                 Expanded(
                   child: TextField(
+                    autofocus: true,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.link),
+                      hintText: 'ADD  # hash tag !',
+                    ),
                     controller: myController,
 //                    autofocus: true,
 //                    textAlign: TextAlign.center,
@@ -135,6 +156,9 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
@@ -147,14 +171,14 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
 //                        leading: Icon(Icons.link),
                         title:
 //                            Text(item["id"].toString() + ":  " + item["title"]),
-                        Text("　＃  " + item["title"]),
+                            Text("　＃  " + item["title"]),
                       ),
                     );
                   }),
             ),
             FlatButton(
               child: Text(
-                '追加',
+                'CREATE',
                 style: TextStyle(
                   color: Colors.white,
                 ),
