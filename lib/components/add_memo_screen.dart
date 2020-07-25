@@ -185,8 +185,11 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
+               int _memoId = Provider.of<MemoData>(context, listen: false).memoId;
                 Provider.of<MemoData>(context, listen: false)
-                    .addData(_addingMemoTitle, _addingMemoBody);
+                    .addData(_addingMemoTitle, _addingMemoBody,'',_memoId);
+               Provider.of<MemoData>(context, listen: false).memoId++;
+                print(Provider.of<MemoData>(context, listen: false).memoId);
                 Navigator.pop(context);
               },
             ),
