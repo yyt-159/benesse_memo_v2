@@ -5,8 +5,9 @@ class ShowScreen extends StatefulWidget {
 
   String memoTitle;
   String memoBody;
+  String photoName;
 
-  ShowScreen({this.memoTitle, this.memoBody});
+  ShowScreen({this.memoTitle, this.memoBody, this.photoName});
 
   @override
   _ShowScreenState createState() => _ShowScreenState();
@@ -23,10 +24,17 @@ class _ShowScreenState extends State<ShowScreen> {
       ),
       endDrawer: BenesseDrawer(),
       body: Center(
-        child: Container(
-          child: Text(widget.memoBody),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 40.0),
+            //用意でき次第Image.asset(photoName)に変更
+            Image.network('https://placehold.jp/314x256.png'),
+            SizedBox(height: 40.0),
+            Text(widget.memoBody),
+            //用意でき次第keywordを表示させるWidgetに変更
+          ],
         ),
-      )
+      ),
     );
   }
 }

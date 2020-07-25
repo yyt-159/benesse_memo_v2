@@ -20,6 +20,7 @@ class MemoList extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ShowScreen(
                     memoTitle:memoData.memoStore[index].memoTitle,
                     memoBody: memoData.memoStore[index].memoBody,
+                    photoName:memoData.memoStore[index].photoName,
                   )));
               },
               child: MemoTile(
