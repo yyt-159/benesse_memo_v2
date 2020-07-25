@@ -176,9 +176,12 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                Provider.of<MemoData>(context, listen: false)
-                    .addData(_addingMemoTitle, _addingMemoBody);
-                Navigator.pop(context);
+                final prov = Provider.of<MemoData>(context, listen:false);
+                prov.addData(_addingMemoTitle, _addingMemoBody);
+                int id = prov.dataCount;
+                for(int i=0;i<items.length;i++){
+                  prov.registarKeyword(items[i]['title'], id);
+                }
               },
             ),
           ],
