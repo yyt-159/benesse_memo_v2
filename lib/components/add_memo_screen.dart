@@ -224,8 +224,8 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
               onPressed: () {
                 int _memoId =
                     Provider.of<MemoData>(context, listen: false).memoId;
-                Provider.of<MemoData>(context, listen: false)
-                    .addData(_addingMemoTitle, _addingMemoBody, '', _memoId);
+                Provider.of<MemoData>(context, listen: false).addData(
+                    _addingMemoTitle, _addingMemoBody, _imagePathName, _memoId);
                 Provider.of<MemoData>(context, listen: false).memoId++;
                 print(Provider.of<MemoData>(context, listen: false).memoId);
                 Navigator.pop(context);
