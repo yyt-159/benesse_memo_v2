@@ -5,8 +5,8 @@ class MemoTemp{
   String memoBody;
   String memoTitle;
   String photoName;
+  int memoId;
 
-
-  MemoTemp({this.memoBody,this.memoTitle, this.photoName});
+  MemoTemp({this.memoBody,this.memoTitle, this.photoName,this.memoId});
 
 }
