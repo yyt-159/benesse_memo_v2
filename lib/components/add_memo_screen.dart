@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'memo_data.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'image_file_controller.dart';
+
 // 表示用の書式設定
 const kLabelTextStyle = TextStyle(
   fontSize: 18,
   color: Colors.black,
 );
+
 class AddMemoScreen extends StatefulWidget {
   @override
   _AddMemoScreenState createState() => _AddMemoScreenState();
 }
+
 class _AddMemoScreenState extends State<AddMemoScreen> {
   String _addingMemoTitle;
   String _addingMemoBody;
@@ -24,6 +31,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       items.add({"id": _counter, "title": inputkeyword});
     });
   }
+
   //　上記リストのカウント変数（ID用）
   int _counter = 0;
   @override
@@ -32,6 +40,29 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
     myController.dispose();
     super.dispose();
   }
+
+  File _image;
+  String _imagePathName;
+  // インスタンス生成
+  final ImagePicker picker = ImagePicker();
+
+  void selectImage() async {
+    print('push button');
+
+    // アルバムから読み込み
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      _imagePathName = pickedFile.path;
+    } else {
+      print('Error');
+    }
+    var savedFile = await FileController.saveLocalImage(_image); //追加
+    setState(() {
+      this._image = savedFile; //変更
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,11 +104,34 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 SizedBox(
                   width: 40,
                 ),
-                Icon(
-                  Icons.class_,
-                  color: Colors.blue[400],
-                  size: 100.0,
-                ),
+                //画像をストレージから挿入
+                Container(
+                    child: (_image == null)
+                        ? FlatButton(
+                            padding: EdgeInsets.all(20.0),
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              side: BorderSide(
+                                color: Colors.white,
+                                width: 1.0,
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                            child: Icon(Icons.add, color: Colors.black),
+                            onPressed: () {
+                              selectImage();
+                            })
+                        : FlatButton(
+                            onPressed: () {
+                              selectImage();
+                            },
+                            child: Image.memory(
+                              _image.readAsBytesSync(),
+                              width: 200.0,
+                              height: 200.0,
+                            ),
+                          )),
               ],
             ), // Body（Image）
             Row(
@@ -147,7 +201,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
 //                        leading: Icon(Icons.link),
                         title:
 //                            Text(item["id"].toString() + ":  " + item["title"]),
-                        Text("　＃  " + item["title"]),
+                            Text("　＃  " + item["title"]),
                       ),
                     );
                   }),
