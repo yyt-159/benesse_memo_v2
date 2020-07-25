@@ -36,7 +36,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('新規作成'),
+        title: Text('NEW NOTEBOOK'),
         centerTitle: true,
       ),
       body: Padding(
@@ -46,17 +46,14 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text(
-                  'Title',
-                  style: kLabelTextStyle,
-                ),
-                SizedBox(
-                  width: 40,
-                ),
                 Expanded(
                   child: TextField(
                     autofocus: true,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.title),
+                      hintText: 'MEMO TITLE *',
+                    ),
                     onChanged: (newMemoTitle) {
                       _addingMemoTitle = newMemoTitle;
                     },
@@ -64,35 +61,45 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 ),
               ],
             ), // Title
+            SizedBox(
+              height: 15,
+            ),
             Row(
               children: <Widget>[
-                Text(
-                  'Body',
-                  style: kLabelTextStyle,
-                ),
                 SizedBox(
-                  width: 40,
+                  width: 20,
                 ),
-                Icon(
-                  Icons.class_,
-                  color: Colors.blue[400],
-                  size: 100.0,
+                Icon(Icons.import_contacts),
+                SizedBox(
+                  width: 30,
+                ),
+                FlatButton(
+                  child: Text(
+                    '+',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  color: Colors.lightBlueAccent,
+                  onPressed: () {
+                    addKeyword(myController.text);
+                  },
                 ),
               ],
             ), // Body（Image）
             Row(
               children: <Widget>[
-                Text(
-                  'Memo',
-                  style: kLabelTextStyle,
-                ),
                 SizedBox(
-                  width: 30,
+                  width: 20,
                 ),
                 Expanded(
                   child: TextField(
                     autofocus: true,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.insert_comment),
+                      hintText: '+α memo',
+                    ),
                     onChanged: (newMemoBody) {
                       _addingMemoBody = newMemoBody;
                     },
@@ -100,17 +107,22 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 ),
               ],
             ), // Memo
+            SizedBox(
+              height: 25,
+            ),
             Row(
               children: <Widget>[
-                Text(
-                  'Keyword',
-                  style: kLabelTextStyle,
-                ),
                 SizedBox(
-                  width: 30,
+                  width: 20,
                 ),
                 Expanded(
                   child: TextField(
+                    autofocus: true,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.link),
+                      hintText: 'ADD  # hash tag !',
+                    ),
                     controller: myController,
 //                    autofocus: true,
 //                    textAlign: TextAlign.center,
@@ -135,6 +147,9 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
@@ -154,7 +169,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
             ),
             FlatButton(
               child: Text(
-                '追加',
+                'CREATE',
                 style: TextStyle(
                   color: Colors.white,
                 ),
