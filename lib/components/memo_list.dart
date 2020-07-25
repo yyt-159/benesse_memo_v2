@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'memo_data.dart';
 import 'memo_tile.dart';
-import 'memo_edit_screen.dart';
+import 'memo_show_screen.dart';
 
 class MemoList extends StatelessWidget {
   @override
@@ -12,11 +12,15 @@ class MemoList extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.only(top: 20.0, right: 30.0, bottom: 30.0, left: 30.0),
           child: ListView.builder(itemBuilder: (context, index) {
-            return RaisedButton(
+            return FlatButton(
+              color: Colors.white,
               onPressed: (){
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EditScreen()));
+                  MaterialPageRoute(builder: (context) => ShowScreen(
+                    memoTitle:memoData.memoStore[index].memoTitle,
+                    memoBody: memoData.memoStore[index].memoBody,
+                  )));
               },
               child: MemoTile(
                 memoTitle: memoData.memoStore[index].memoTitle,
