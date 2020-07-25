@@ -66,6 +66,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   void _deleteChip(Key chipKey) {
     setState(() => _chipList.removeWhere((Widget w) => w.key == chipKey));
   }
+
   @override
   // widgetの破棄時にコントローラも破棄する
   void dispose() {
@@ -73,6 +74,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
     _textFieldFocusNode.dispose();
     super.dispose();
   }
+
   void _onSubmitted(String text) {
     setState(() {
       _inputController.text = '';
@@ -244,23 +246,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
             SizedBox(
               height: 10,
             ),
-            Expanded(
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: items.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final item = items[index];
-                    return new Card(
-                      child: ListTile(
-//                        leading: Icon(Icons.link),
-                        title:
-//                            Text(item["id"].toString() + ":  " + item["title"]),
-                            Text("　＃  " + item["title"]),
-                      ),
-                    );
-                  }),
-            ),
+
             FlatButton(
               child: Text(
                 'CREATE',
@@ -270,6 +256,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
+
                 int _memoId =
                     Provider.of<MemoData>(context, listen: false).memoId;
                 Provider.of<MemoData>(context, listen: false)
