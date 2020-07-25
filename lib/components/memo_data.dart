@@ -19,6 +19,7 @@ class MemoData extends ChangeNotifier {
     return memoStore.length;
   }
 
+
   int get keywordCount{
     return keywordStore.length;
   }
@@ -41,6 +42,12 @@ class MemoData extends ChangeNotifier {
     if(flag==false){
       keywordStore.add(KeywordTemp(keywordName: name, noteId: [id]));
     }
+  }
+
+  void addData (memoTitle,memoBody){
+    final memo = MemoTemp(memoTitle: memoTitle,memoBody: memoBody);
+    memoStore.add(memo);
+    notifyListeners();
   }
 
 }
