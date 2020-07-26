@@ -32,8 +32,6 @@ class _ShowScreenState extends State<ShowScreen> {
             SizedBox(height: 40.0),
             //用意でき次第Image.asset(photoName)に変更
             Container(
-                //constraints: BoxConstraints.expand(),
-
                 child: (widget.memoTitle == '豊臣秀吉')
                     ? Image.asset('${widget.photoName}')
                     : Image.memory(
