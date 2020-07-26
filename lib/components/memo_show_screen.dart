@@ -19,8 +19,10 @@ class _ShowScreenState extends State<ShowScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.memoTitle,
-          style: kLargeTextStyle,),
+        title: Text(
+          widget.memoTitle,
+          style: kLargeTextStyle,
+        ),
         centerTitle: true,
       ),
       endDrawer: BenesseDrawer(),
@@ -33,8 +35,9 @@ class _ShowScreenState extends State<ShowScreen> {
                 child: (widget.memoTitle == '豊臣秀吉')
                     ? Image.asset('${widget.photoName}')
                     : Image.memory(
-                  File(widget.photoName).readAsBytesSync(),
-                )),
+                        File(widget.photoName).readAsBytesSync(),
+                      )),
+
             SizedBox(height: 40.0),
             Text(widget.memoBody),
             //用意でき次第keywordを表示させるWidgetに変更
@@ -44,4 +47,3 @@ class _ShowScreenState extends State<ShowScreen> {
     );
   }
 }
-
