@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'memo_list.dart';
 import 'add_memo_screen.dart';
+import 'style.dart';
 
 class MemoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('日本史'),
+          title: Text('日本史', style: kLargeTextStyle),
           centerTitle: true,
         ),
       floatingActionButton: FloatingActionButton(
