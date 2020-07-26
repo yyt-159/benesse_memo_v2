@@ -91,7 +91,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   }
 
   File _image;
-  String _imagePathName;
+  String _imagePathName='';
   // インスタンス生成
   final ImagePicker picker = ImagePicker();
 
@@ -252,7 +252,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                           .memoId;
                   Provider.of<MemoData>(context, listen: false)
                       .addData(
-                      _addingMemoTitle, _addingMemoBody, '', _memoId, keyIds);
+                      _addingMemoTitle, _addingMemoBody, _imagePathName, _memoId, keyIds);
                   Provider
                       .of<MemoData>(context, listen: false)
                       .memoId++;

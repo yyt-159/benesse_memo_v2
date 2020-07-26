@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'benesse_drawer.dart';
 import 'dart:io';
+import 'style.dart';
 
 class ShowScreen extends StatefulWidget {
   String memoTitle;
@@ -16,10 +17,10 @@ class ShowScreen extends StatefulWidget {
 class _ShowScreenState extends State<ShowScreen> {
   @override
   Widget build(BuildContext context) {
-    //print('${widget.photoName}');
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.memoTitle),
+        title: Text(widget.memoTitle,
+          style: kLargeTextStyle,),
         centerTitle: true,
       ),
       endDrawer: BenesseDrawer(),
@@ -32,8 +33,8 @@ class _ShowScreenState extends State<ShowScreen> {
                 child: (widget.memoTitle == '豊臣秀吉')
                     ? Image.asset('${widget.photoName}')
                     : Image.memory(
-                        File(widget.photoName).readAsBytesSync(),
-                      )),
+                  File(widget.photoName).readAsBytesSync(),
+                )),
             SizedBox(height: 40.0),
             Text(widget.memoBody),
             //用意でき次第keywordを表示させるWidgetに変更
@@ -43,3 +44,4 @@ class _ShowScreenState extends State<ShowScreen> {
     );
   }
 }
+
