@@ -29,9 +29,9 @@ class SearchList extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => ShowScreen(
                       memoTitle:memoData.memoStore[noteIds[index]-1].memoTitle,
                       memoBody: memoData.memoStore[noteIds[index]-1].memoBody,
-                      photoName:memoData.memoStore[index-1].photoName,
-                      keywordIds: memoData.memoStore[index-1].keywordsId,
-                      memoId: memoData.memoStore[index-1].memoId
+                      photoName:memoData.memoStore[noteIds[index]-1].photoName,
+                      keywordIds: memoData.memoStore[noteIds[index-1]].keywordsId,
+                      memoId: memoData.memoStore[noteIds[index-1]].memoId
                     )));
               },
               child: MemoTile(

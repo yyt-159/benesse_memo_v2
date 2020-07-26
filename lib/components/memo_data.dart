@@ -18,6 +18,7 @@ class MemoData extends ChangeNotifier {
         photoName: 'images/hideyoshi_note.png',
         keywordsId: [1, 3],
         memoId: 2),
+    
   ];
   List<KeywordTemp> keywordStore = [
     KeywordTemp(keywordName: '豊臣秀吉', noteId: [2], keywordId: 1),
