@@ -95,7 +95,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   final ImagePicker picker = ImagePicker();
 
   void selectImage() async {
-    //print('push button');
+    print('push button');
 
     // アルバムから読み込み
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -106,15 +106,13 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       print('Error');
     }
     var savedFile = await FileController.saveLocalImage(_image); //追加
-    //_image = savedFile;
-    setState(() {
-      this._image = savedFile; //変更
-    });
+    setState() {
+      _image = savedFile; //変更
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print('$_imagePathName');
     return Scaffold(
       appBar: AppBar(
         title: Text('NEW NOTEBOOK'),

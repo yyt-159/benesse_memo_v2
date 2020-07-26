@@ -14,14 +14,18 @@ class ShowScreen extends StatefulWidget {
   List<int> keywordIds;
   int memoId;
 
-  ShowScreen({this.memoTitle, this.memoBody, this.photoName, this.keywordIds,this.memoId});
+  ShowScreen(
+      {this.memoTitle,
+      this.memoBody,
+      this.photoName,
+      this.keywordIds,
+      this.memoId});
 
   @override
   _ShowScreenState createState() => _ShowScreenState();
 }
 
 class _ShowScreenState extends State<ShowScreen> {
-
   @override
   Widget build(BuildContext context) {
     final myController = TextEditingController();
@@ -40,6 +44,7 @@ class _ShowScreenState extends State<ShowScreen> {
     void _deleteChip(Key chipKey) {
       setState(() => _keywordList.removeWhere((Widget w) => w.key == chipKey));
     }
+
     void _addChip(String text) {
       var chipKey = Key('chip_key_$_keyNumber');
       _keyNumber++;
@@ -47,41 +52,41 @@ class _ShowScreenState extends State<ShowScreen> {
         FlatButton(
           color: Colors.grey,
           //key: chipKey,
-          child: Text('#'+text),
-          onPressed: (){
+          child: Text('#' + text),
+          onPressed: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => KeywordScreen(keyword: text)));
+                MaterialPageRoute(
+                    builder: (context) => KeywordScreen(keyword: text)));
           },
         ),
       );
     }
 
-    for(int i=0;i<keywordIds.length;i++){
-      for(int j=0;j<prov.keywordCount;j++) {
-        if(prov.keywordStore[j].keywordId==keywordIds[i]){
+    for (int i = 0; i < keywordIds.length; i++) {
+      for (int j = 0; j < prov.keywordCount; j++) {
+        if (prov.keywordStore[j].keywordId == keywordIds[i]) {
           _addChip(prov.keywordStore[j].keywordName);
         }
       }
-
     }
 
     // widgetの破棄時にコントローラも破棄する
     void dispose() {
-    myController.dispose();
-    _textFieldFocusNode.dispose();
-    super.dispose();
+      myController.dispose();
+      _textFieldFocusNode.dispose();
+      super.dispose();
     }
-
 
     void _onSubmitted(String text) {
-      prov.registarKeyword(text,widget.memoId);
-    setState(() {
-      _inputController.text = '';
-      _addChip(text);
-      FocusScope.of(context).requestFocus(_textFieldFocusNode);
+      prov.registarKeyword(text, widget.memoId);
+      setState(() {
+        _inputController.text = '';
+        _addChip(text);
+        FocusScope.of(context).requestFocus(_textFieldFocusNode);
       });
     }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -96,13 +101,16 @@ class _ShowScreenState extends State<ShowScreen> {
           children: <Widget>[
             //SizedBox(height: 40.0),
             //用意でき次第Image.asset(photoName)に変更
-            Container(
-                child: (widget.memoTitle == '豊臣秀吉')
-                    ? Image.asset('${widget.photoName}')
-                    : Image.memory(
 
-                  File(widget.photoName).readAsBytesSync(),
-                )),
+            Container(
+                padding: EdgeInsets.all(10.0),
+                margin: EdgeInsets.all(10.0),
+                child:
+                    (widget.memoTitle == '豊臣秀吉' || widget.memoTitle == '織田信長')
+                        ? Image.asset('${widget.photoName}')
+                        : Image.memory(
+                            File(widget.photoName).readAsBytesSync(),
+                          )),
             SizedBox(height: 40.0),
             Text(widget.memoBody),
             //用意でき次第keywordを表示させるWidgetに変更
