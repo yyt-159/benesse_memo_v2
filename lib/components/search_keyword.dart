@@ -14,6 +14,8 @@ class SearchList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     noteIds = Provider.of<MemoData>(context, listen: false).getNoteIds(keyword);
+    print(noteIds);
+    int listlength = noteIds.length;
     return Consumer<MemoData>(
       builder: (context, memoData, child){
         return Padding(
@@ -25,15 +27,19 @@ class SearchList extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ShowScreen(
-                      memoTitle:memoData.memoStore[noteIds[index]].memoTitle,
-                      memoBody: memoData.memoStore[noteIds[index]].memoBody,
+                      memoTitle:memoData.memoStore[noteIds[index]-1].memoTitle,
+                      memoBody: memoData.memoStore[noteIds[index]-1].memoBody,
+                      photoName:memoData.memoStore[index-1].photoName,
+                      keywordIds: memoData.memoStore[index-1].keywordsId,
+                      memoId: memoData.memoStore[index-1].memoId
                     )));
               },
               child: MemoTile(
-                memoTitle: memoData.memoStore[noteIds[index]].memoTitle,
+                memoTitle: memoData.memoStore[noteIds[index]-1].memoTitle,
               ),
             );
-          },itemCount: memoData.dataCount,),
+          },itemCount: listlength,
+          ),
         );
       },
     );

@@ -6,16 +6,9 @@ class MemoData extends ChangeNotifier {
   int memoId = 1;
 
   List<MemoTemp> memoStore = [
-    MemoTemp(
-        memoTitle: '織田信長',
-        memoBody: '織田信長のメモが表示されます',
-        photoName: '',
-        keywordsId: [1]),
-    MemoTemp(
-        memoTitle: '豊臣秀吉',
-        memoBody: '豊臣秀吉のメモが表示されます',
-        photoName: 'images/hideyoshi_note_re.png',
-        keywordsId: [2]),
+
+    MemoTemp(memoTitle: '織田信長',memoBody: '織田信長のメモが表示されます',photoName: '',keywordsId: [2,3], memoId: 1),
+    MemoTemp(memoTitle: '豊臣秀吉',memoBody: '豊臣秀吉のメモが表示されます',photoName: 'images/hideyoshi_note.png',keywordsId: [1,3], memoId: 2),
   ];
   List<KeywordTemp> keywordStore = [
     KeywordTemp(keywordName: '豊臣秀吉', noteId: [2], keywordId: 1),
@@ -30,15 +23,14 @@ class MemoData extends ChangeNotifier {
     return keywordStore.length;
   }
 
-  List getNoteIds(String name) {
-    for (int i = 0; i < dataCount; i++) {
-      if (keywordStore[i].keywordName == name) return keywordStore[i].noteId;
+  List getNoteIds(String name){
+    for(int i=0;i<keywordCount;i++){
+      if(keywordStore[i].keywordName==name) return keywordStore[i].noteId;
     }
   }
-
-  List getKeywordIds(String name) {
-    for (int i = 0; i < keywordCount; i++) {
-      if (memoStore[i].memoTitle == name) return memoStore[i].keywordsId;
+  List getKeywordIds(String name){
+    for(int i=0;i<dataCount;i++){
+      if(memoStore[i].memoTitle==name) return memoStore[i].keywordsId;
     }
   }
 
