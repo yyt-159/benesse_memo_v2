@@ -4,6 +4,7 @@ class BenesseDrawer extends StatefulWidget {
   @override
   _BenesseDrawerState createState() => _BenesseDrawerState();
 }
+
 // ベネッセの推薦問題　データ格納用リスト
 // [0]:問題文、　[1-3]選択肢
 List<String> question_items = [
@@ -12,6 +13,7 @@ List<String> question_items = [
   "2:百姓が武装して一揆することを防ぐため",
   "3:戦国時代を終わらせるため",
 ];
+
 class _BenesseDrawerState extends State<BenesseDrawer> {
   @override
   Widget build(BuildContext context) {
@@ -39,12 +41,22 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
               ),
             ),
             ListTile(
-              title: Text("織田信長は生きていた、、？"),
+              title: Text("豊臣秀吉は織田信長の右腕!!?"),
               trailing: Icon(Icons.arrow_forward),
             ),
+            Container(
+              child: Image.asset('images/Nobunaga.jpg'),
+              width: 400.0,
+              height: 230.0,
+            ),
             ListTile(
-              title: Text("本能寺の変の謎"),
+              title: Text("豊臣秀吉の施策「太閤検地」とは"),
               trailing: Icon(Icons.arrow_forward),
+            ),
+            Container(
+              child: Image.asset('images/taikou.jpeg'),
+              width: 400.0,
+              height: 200.0,
             ),
             SizedBox(
               height: 30,

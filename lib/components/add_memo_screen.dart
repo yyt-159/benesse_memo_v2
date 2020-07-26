@@ -81,7 +81,6 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
     super.dispose();
   }
 
-
   void _onSubmitted(String text) {
     setState(() {
       _inputController.text = '';
@@ -91,12 +90,12 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   }
 
   File _image;
-  String _imagePathName='';
+  String _imagePathName = '';
   // インスタンス生成
   final ImagePicker picker = ImagePicker();
 
   void selectImage() async {
-    print('push button');
+    //print('push button');
 
     // アルバムから読み込み
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -107,166 +106,164 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       print('Error');
     }
     var savedFile = await FileController.saveLocalImage(_image); //追加
-    setState() {
-      _image = savedFile; //変更
-    }
+    //_image = savedFile;
+    setState(() {
+      this._image = savedFile; //変更
+    });
   }
 
-
-
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('NEW NOTEBOOK'),
-          centerTitle: true,
-        ),
-        body: Padding(
-          padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      autofocus: true,
-                      textAlign: TextAlign.left,
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.title),
-                        hintText: 'MEMO TITLE *',
-                      ),
-                      onChanged: (newMemoTitle) {
-                        _addingMemoTitle = newMemoTitle;
-                      },
+  @override
+  Widget build(BuildContext context) {
+    print('$_imagePathName');
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('NEW NOTEBOOK'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    autofocus: true,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.title),
+                      hintText: 'MEMO TITLE *',
                     ),
-                  ),
-                ],
-              ),
-              // Title
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Icon(Icons.import_contacts),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  //画像をストレージから挿入
-                  Container(
-                      child: (_image == null)
-                          ? FlatButton(
-                        child: Text(
-                          '+',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        color: Colors.lightBlueAccent,
-                        onPressed: () {
-                          selectImage();
-                        },
-                      )
-                          : FlatButton(
-                        onPressed: () {
-                          selectImage();
-                        },
-                        child: Image.memory(
-                          _image.readAsBytesSync(),
-                          width: 200.0,
-                          height: 200.0,
-                        ),
-                      )),
-                ],
-              ),
-              // Body（Image）
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    child: TextField(
-                      autofocus: true,
-                      textAlign: TextAlign.left,
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.insert_comment),
-                        hintText: '+α memo',
-                      ),
-                      onChanged: (newMemoBody) {
-                        _addingMemoBody = newMemoBody;
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              // Memo
-              SizedBox(
-                height: 15,
-              ),
-              TextField(
-                focusNode: _textFieldFocusNode,
-                autofocus: true,
-                controller: _inputController,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.link),
-                  hintText: 'ADD  # hash tag !',
-                ),
-                onSubmitted: _onSubmitted,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Wrap(
-                      alignment: WrapAlignment.start,
-                      spacing: 8.0,
-                      runSpacing: 0.0,
-                      direction: Axis.horizontal,
-                      children: _chipList,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-
-              FlatButton(
-                child: Text(
-                  'CREATE',
-                  style: TextStyle(
-                    color: Colors.white,
+                    onChanged: (newMemoTitle) {
+                      _addingMemoTitle = newMemoTitle;
+                    },
                   ),
                 ),
-                color: Colors.lightBlueAccent,
-                onPressed: () {
-                  int _memoId =
-                      Provider
-                          .of<MemoData>(context, listen: false)
-                          .memoId;
+              ],
+            ),
+            // Title
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(Icons.import_contacts),
+                SizedBox(
+                  width: 30,
+                ),
+                //画像をストレージから挿入
+                Container(
+                    child: (_image == null)
+                        ? FlatButton(
+                            child: Text(
+                              '+',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            color: Colors.lightBlueAccent,
+                            onPressed: () {
+                              selectImage();
+                            },
+                          )
+                        : FlatButton(
+                            onPressed: () {
+                              selectImage();
+                            },
+                            child: Image.memory(
+                              _image.readAsBytesSync(),
+                              width: 200.0,
+                              height: 200.0,
+                            ),
+                          )),
+              ],
+            ),
+            // Body（Image）
+            Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: TextField(
+                    autofocus: true,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.insert_comment),
+                      hintText: '+α memo',
+                    ),
+                    onChanged: (newMemoBody) {
+                      _addingMemoBody = newMemoBody;
+                    },
+                  ),
+                ),
+              ],
+            ),
+            // Memo
+            SizedBox(
+              height: 15,
+            ),
+            TextField(
+              focusNode: _textFieldFocusNode,
+              autofocus: true,
+              controller: _inputController,
+              decoration: InputDecoration(
+                icon: Icon(Icons.link),
+                hintText: 'ADD  # hash tag !',
+              ),
+              onSubmitted: _onSubmitted,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Wrap(
+                    alignment: WrapAlignment.start,
+                    spacing: 8.0,
+                    runSpacing: 0.0,
+                    direction: Axis.horizontal,
+                    children: _chipList,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+
+            FlatButton(
+              child: Text(
+                'CREATE',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              color: Colors.lightBlueAccent,
+              onPressed: () {
+                int _memoId =
+                    Provider.of<MemoData>(context, listen: false).memoId;
+                Provider.of<MemoData>(context, listen: false).addData(
+                    _addingMemoTitle,
+                    _addingMemoBody,
+                    _imagePathName,
+                    _memoId,
+                    keyIds);
+                Provider.of<MemoData>(context, listen: false).memoId++;
+                for (int i = 0; i < items.length; i++) {
                   Provider.of<MemoData>(context, listen: false)
-                      .addData(
-                      _addingMemoTitle, _addingMemoBody, _imagePathName, _memoId, keyIds);
-                  Provider
-                      .of<MemoData>(context, listen: false)
-                      .memoId++;
-                  for (int i = 0; i < items.length; i++) {
-                    Provider.of<MemoData>(context, listen: false)
-                        .registarKeyword(items[i]['title'], _memoId);
-                  }
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
+                      .registarKeyword(items[i]['title'], _memoId);
+                }
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
-
+}
