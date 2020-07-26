@@ -13,9 +13,13 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<MemoData>(
       create: (context) => MemoData(),
       child: MaterialApp(
+        theme: ThemeData(
+          primaryColor: Color(0xffF6F5EF),
+          accentColor: Color(0xffFF4502),
+//            colorScheme:Color(0xff403F3E),
+        ),
         home: MemoScreen(),
       ),
     );
   }
 }
-
