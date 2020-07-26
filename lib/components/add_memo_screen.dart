@@ -16,7 +16,7 @@ class AddMemoScreen extends StatefulWidget {
 
 class _AddMemoScreenState extends State<AddMemoScreen> {
   String _addingMemoTitle;
-  String _addingMemoBody;
+  String _addingMemoBody='';
 
   // テキストフィールドの管理用コントローラを作成
   final myController = TextEditingController();
