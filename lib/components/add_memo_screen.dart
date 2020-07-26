@@ -5,29 +5,23 @@ import 'memo_data.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'image_file_controller.dart';
-
 // 表示用の書式設定
 const kLabelTextStyle = TextStyle(
   fontSize: 18,
   color: Colors.black,
 );
-
 class AddMemoScreen extends StatefulWidget {
   @override
   _AddMemoScreenState createState() => _AddMemoScreenState();
 }
-
 class _AddMemoScreenState extends State<AddMemoScreen> {
   String _addingMemoTitle;
   String _addingMemoBody = '';
-
   // テキストフィールドの管理用コントローラを作成
   final myController = TextEditingController();
-
   // データ格納用リスト
   List<Map<String, dynamic>> items = [];
   List<int> keyIds = [];
-
   // Keywordに入力された言葉を追加する
   void addKeyword(String inputkeyword) {
     final prov = Provider.of<MemoData>(context, listen: false);
@@ -44,20 +38,17 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       items.add({"id": keyId, "title": inputkeyword});
     });
   }
-
   //　上記リストのカウント変数（ID用）
   int _counter = 0;
   var _textFieldFocusNode;
   var _inputController = TextEditingController();
   var _chipList = List<Chip>();
   var _keyNumber = 0;
-
   @override
   void initState() {
     _textFieldFocusNode = FocusNode();
     super.initState();
   }
-
   void _addChip(String text) {
     var chipKey = Key('chip_key_$_keyNumber');
     _keyNumber++;
@@ -69,18 +60,15 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       ),
     );
   }
-
   void _deleteChip(Key chipKey) {
     setState(() => _chipList.removeWhere((Widget w) => w.key == chipKey));
   }
-
   // widgetの破棄時にコントローラも破棄する
   void dispose() {
     myController.dispose();
     _textFieldFocusNode.dispose();
     super.dispose();
   }
-
   void _onSubmitted(String text) {
     setState(() {
       _inputController.text = '';
@@ -88,15 +76,12 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       FocusScope.of(context).requestFocus(_textFieldFocusNode);
     });
   }
-
   File _image;
   String _imagePathName = '';
   // インスタンス生成
   final ImagePicker picker = ImagePicker();
-
   void selectImage() async {
-    print('push button');
-
+    //print('push button');
     // アルバムから読み込み
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -106,13 +91,14 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
       print('Error');
     }
     var savedFile = await FileController.saveLocalImage(_image); //追加
-    setState() {
-      _image = savedFile; //変更
-    }
+    //_image = savedFile;
+    setState(() {
+      this._image = savedFile; //変更
+    });
   }
-
   @override
   Widget build(BuildContext context) {
+    print('$_imagePathName');
     return Scaffold(
       appBar: AppBar(
         title: Text('NEW NOTEBOOK'),
@@ -157,27 +143,27 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                 Container(
                     child: (_image == null)
                         ? FlatButton(
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            color: Colors.lightBlueAccent,
-                            onPressed: () {
-                              selectImage();
-                            },
-                          )
+                      child: Text(
+                        '+',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      color: Color(0xffFF4502),
+                      onPressed: () {
+                        selectImage();
+                      },
+                    )
                         : FlatButton(
-                            onPressed: () {
-                              selectImage();
-                            },
-                            child: Image.memory(
-                              _image.readAsBytesSync(),
-                              width: 200.0,
-                              height: 200.0,
-                            ),
-                          )),
+                      onPressed: () {
+                        selectImage();
+                      },
+                      child: Image.memory(
+                        _image.readAsBytesSync(),
+                        width: 200.0,
+                        height: 200.0,
+                      ),
+                    )),
               ],
             ),
             // Body（Image）
@@ -233,7 +219,6 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
             SizedBox(
               height: 10,
             ),
-
             FlatButton(
               child: Text(
                 'CREATE',
@@ -241,7 +226,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                   color: Colors.white,
                 ),
               ),
-              color: Colors.lightBlueAccent,
+              color: Color(0xffFF4502),
               onPressed: () {
                 int _memoId =
                     Provider.of<MemoData>(context, listen: false).memoId;
@@ -253,6 +238,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                     keyIds);
                 Provider.of<MemoData>(context, listen: false).memoId++;
                 for (int i = 0; i < items.length; i++) {
+                  addKeyword(items[i]['title']);
                   Provider.of<MemoData>(context, listen: false)
                       .registarKeyword(items[i]['title'], _memoId);
                 }

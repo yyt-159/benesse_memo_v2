@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 class BenesseDrawer extends StatefulWidget {
   @override
   _BenesseDrawerState createState() => _BenesseDrawerState();
 }
-
 // ベネッセの推薦問題　データ格納用リスト
 // [0]:問題文、　[1-3]選択肢
 List<String> question_items = [
@@ -13,7 +11,6 @@ List<String> question_items = [
   "2:百姓が武装して一揆することを防ぐため",
   "3:戦国時代を終わらせるため",
 ];
-
 class _BenesseDrawerState extends State<BenesseDrawer> {
   @override
   Widget build(BuildContext context) {
@@ -22,6 +19,37 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
       child: Drawer(
         child: ListView(
           children: <Widget>[
+            // Benesse Title
+            Row(
+              children: <Widget>[
+                Container(
+                  child: Image.asset('images/benesse_logo.png'),
+                  width: 400.0,
+//              height: 230.0,
+                ),
+                Icon(Icons.add),
+              ],
+            ),
+//            Container(
+//              height: 130,
+//              child: DrawerHeader(
+//                child: Center(
+//                  child: Text(
+//                    '＋ Benesse',
+//                    style: TextStyle(
+//                      fontSize: 50.0,
+//                      fontWeight: FontWeight.w700,
+//                      color: Colors.white,
+////                        color: Color(0xffFF4502),
+//                    ),
+//                  ),
+//                ),
+//                decoration: BoxDecoration(
+//                  color: Color(0xffFF4502),
+////                  color: Color(0xff403F3E),
+//                ),
+//              ),
+//            ),
             // (1)　画像
             Container(
               height: 80,
@@ -36,7 +64,7 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Color(0xff9e9e9e),
                 ),
               ),
             ),
@@ -59,7 +87,7 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
               height: 200.0,
             ),
             SizedBox(
-              height: 30,
+              height: 90,
             ),
             // (2)　問題
             Container(
@@ -75,7 +103,7 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Color(0xff9e9e9e),
                 ),
               ),
             ),
@@ -89,7 +117,7 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
                     color: Colors.white,
                   ),
                 ),
-                color: Colors.lightBlueAccent,
+                color: Colors.orange[400],
                 onPressed: () {},
               ),
             ),
@@ -102,7 +130,7 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
                     color: Colors.white,
                   ),
                 ),
-                color: Colors.lightBlueAccent,
+                color: Colors.orange[400],
                 onPressed: () {},
               ),
             ),
@@ -115,12 +143,12 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
                     color: Colors.white,
                   ),
                 ),
-                color: Colors.lightBlueAccent,
+                color: Colors.orange[400],
                 onPressed: () {},
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 90,
             ),
             // (3)　ポイント
             Container(
@@ -136,7 +164,7 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Color(0xff9e9e9e),
                 ),
               ),
             ),
@@ -149,12 +177,8 @@ class _BenesseDrawerState extends State<BenesseDrawer> {
               trailing: Icon(Icons.arrow_forward),
             ),
             SizedBox(
-              height: 50,
+              height: 300,
             ),
-//          ListTile(
-//            title: Text("ボタン"),
-//            trailing: Icon(Icons.arrow_forward),
-//          ),
           ],
         ),
       ),

@@ -11,16 +11,20 @@ class MemoScreen extends StatelessWidget {
           title: Text('日本史', style: kLargeTextStyle),
           centerTitle: true,
         ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  AddMemoScreen()
-            ),
-          );
-        },
-        backgroundColor: Colors.lightBlueAccent.shade200,
-        child: Icon(Icons.add),
+      floatingActionButton: Container(
+        height: 100,
+        width: 100,
+        child: FloatingActionButton(
+          backgroundColor: Color(0xffFF4502),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  AddMemoScreen()
+              ),
+            );
+          },
+          child: Icon(Icons.add,size: 50,),
+        ),
       ),
         body:Container(
             decoration: BoxDecoration(
