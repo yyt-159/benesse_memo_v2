@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'memo_temp.dart';
 import 'keyword_temp.dart';
-class MemoData extends ChangeNotifier {
 
+class MemoData extends ChangeNotifier {
   int memoId = 1;
 
   List<MemoTemp> memoStore = [
     MemoTemp(memoTitle: '織田信長',memoBody: '織田信長のメモが表示されます',photoName: '',keywordsId: [1]),
-    MemoTemp(memoTitle: '豊臣秀吉',memoBody: '豊臣秀吉のメモが表示されます',photoName: '',keywordsId: [2]),
+    MemoTemp(memoTitle: '豊臣秀吉',memoBody: '豊臣秀吉のメモが表示されます',photoName: 'images/hideyoshi_note.png',keywordsId: [2]),
+
   ];
   List<KeywordTemp> keywordStore = [
     KeywordTemp(keywordName: '豊臣秀吉', noteId: [2], keywordId: 1),
@@ -30,16 +31,17 @@ class MemoData extends ChangeNotifier {
       if(memoStore[i].memoTitle==name) return memoStore[i].keywordsId;
     }
   }
-  void registarKeyword(String name, int id){
-    bool flag =false;
-    for(int i=0;i<keywordCount;i++){
-      if(keywordStore[i].keywordName==name){
-        flag=true;
+  void registarKeyword(String name, int id) {
+    bool flag = false;
+    for (int i = 0; i < keywordCount; i++) {
+      if (keywordStore[i].keywordName == name) {
+        flag = true;
         keywordStore[i].noteId.add(id);
       }
     }
-    if(flag==false){
-      keywordStore.add(KeywordTemp(keywordName: name, noteId: [id], keywordId: keywordCount));
+    if (flag == false) {
+      keywordStore.add(KeywordTemp(
+          keywordName: name, noteId: [id], keywordId: keywordCount));
     }
     notifyListeners();
   }
