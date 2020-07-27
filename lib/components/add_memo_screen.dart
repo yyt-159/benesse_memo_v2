@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_benesse_memo/components/keyword_temp.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/rendering.dart';
 import 'memo_data.dart';
@@ -21,21 +22,36 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
   final myController = TextEditingController();
   // データ格納用リスト
   List<Map<String, dynamic>> items = [];
-  List<int> keyIds = [];
+  List<Map<String, dynamic>> keyIds = [];
+  List<int> Ids =[];
   // Keywordに入力された言葉を追加する
   void addKeyword(String inputkeyword) {
     final prov = Provider.of<MemoData>(context, listen: false);
     int loopcount = prov.keywordCount;
     int keyId;
+    bool flag = false;
     for (int i = 0; i < loopcount; i++) {
       if (prov.keywordStore[i].keywordName == inputkeyword) {
         keyId = prov.keywordStore[i].keywordId;
-        keyIds.add(keyId);
+        keyIds.add({"keyid": keyId, "keyname": inputkeyword});
+        Ids.add(keyId);
+        flag = true;
       }
+    }
+
+    if(flag==false){
+      prov.keywordStore.add(
+          KeywordTemp(
+              keywordName: inputkeyword,
+              keywordId: loopcount,
+              noteId: [prov.dataCount]
+          )
+      );
+      Ids.add(keyId);
     }
     setState(() {
       _counter++;
-      items.add({"id": keyId, "title": inputkeyword});
+      items.add({"id": _counter, "title": inputkeyword});
     });
   }
   //　上記リストのカウント変数（ID用）
@@ -73,6 +89,7 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
     setState(() {
       _inputController.text = '';
       _addChip(text);
+      addKeyword(text);
       FocusScope.of(context).requestFocus(_textFieldFocusNode);
     });
   }
@@ -229,19 +246,18 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
               color: Color(0xffFF4502),
               onPressed: () {
                 int _memoId =
-                    Provider.of<MemoData>(context, listen: false).memoId;
+                    Provider.of<MemoData>(context, listen: false).dataCount+1;
+                for (int i = 0; i < keyIds.length; i++) {
+                  Provider.of<MemoData>(context, listen: false)
+                      .registarKeyword(keyIds[i]['keyname'], _memoId);
+                }
                 Provider.of<MemoData>(context, listen: false).addData(
                     _addingMemoTitle,
                     _addingMemoBody,
                     _imagePathName,
                     _memoId,
-                    keyIds);
+                    Ids);
                 Provider.of<MemoData>(context, listen: false).memoId++;
-                for (int i = 0; i < items.length; i++) {
-                  addKeyword(items[i]['title']);
-                  Provider.of<MemoData>(context, listen: false)
-                      .registarKeyword(items[i]['title'], _memoId);
-                }
                 Navigator.pop(context);
               },
             ),

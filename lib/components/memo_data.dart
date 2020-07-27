@@ -61,12 +61,15 @@ class MemoData extends ChangeNotifier {
   }
 
   void addData(memoTitle, memoBody, photoName, memoId, keywordsId) {
+    print(memoId);
+    print(keywordsId);
     final memo = MemoTemp(
         memoTitle: memoTitle,
         memoBody: memoBody,
         photoName: photoName,
+        keywordsId: keywordsId,
         memoId: memoId,
-        keywordsId: keywordsId);
+        );
     memoStore.add(memo);
     notifyListeners();
   }
