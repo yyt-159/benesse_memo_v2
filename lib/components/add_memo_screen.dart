@@ -129,16 +129,18 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: TextField(
-                    autofocus: true,
-                    textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.title),
-                      hintText: 'MEMO TITLE *',
+                  child: SingleChildScrollView(
+                    child: TextField(
+                      autofocus: true,
+                      textAlign: TextAlign.left,
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.title),
+                        hintText: 'MEMO TITLE *',
+                      ),
+                      onChanged: (newMemoTitle) {
+                        _addingMemoTitle = newMemoTitle;
+                      },
                     ),
-                    onChanged: (newMemoTitle) {
-                      _addingMemoTitle = newMemoTitle;
-                    },
                   ),
                 ),
               ],
@@ -190,16 +192,18 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
                   width: 20,
                 ),
                 Expanded(
-                  child: TextField(
-                    autofocus: true,
-                    textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.insert_comment),
-                      hintText: '+α memo',
+                  child: SingleChildScrollView(
+                    child: TextField(
+                      autofocus: true,
+                      textAlign: TextAlign.left,
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.insert_comment),
+                        hintText: '+α memo',
+                      ),
+                      onChanged: (newMemoBody) {
+                        _addingMemoBody = newMemoBody;
+                      },
                     ),
-                    onChanged: (newMemoBody) {
-                      _addingMemoBody = newMemoBody;
-                    },
                   ),
                 ),
               ],
@@ -208,15 +212,17 @@ class _AddMemoScreenState extends State<AddMemoScreen> {
             SizedBox(
               height: 15,
             ),
-            TextField(
-              focusNode: _textFieldFocusNode,
-              autofocus: true,
-              controller: _inputController,
-              decoration: InputDecoration(
-                icon: Icon(Icons.link),
-                hintText: 'ADD  # hash tag !',
+            SingleChildScrollView(
+              child: TextField(
+                focusNode: _textFieldFocusNode,
+                autofocus: true,
+                controller: _inputController,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.link),
+                  hintText: 'ADD  # hash tag !',
+                ),
+                onSubmitted: _onSubmitted,
               ),
-              onSubmitted: _onSubmitted,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
