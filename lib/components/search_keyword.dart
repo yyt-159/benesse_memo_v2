@@ -30,8 +30,8 @@ class SearchList extends StatelessWidget {
                       memoTitle:memoData.memoStore[noteIds[index]-1].memoTitle,
                       memoBody: memoData.memoStore[noteIds[index]-1].memoBody,
                       photoName:memoData.memoStore[noteIds[index]-1].photoName,
-                      keywordIds: memoData.memoStore[noteIds[index-1]].keywordsId,
-                      memoId: memoData.memoStore[noteIds[index-1]].memoId
+                      keywordIds: memoData.memoStore[noteIds[index]-1].keywordsId,
+                      memoId: memoData.memoStore[noteIds[index]-1].memoId
                     )));
               },
               child: MemoTile(
